@@ -37,10 +37,12 @@ const retrieveTicket = async (id: number | null): Promise<TicketData> => {
         }
       }
     );
-
+    console.log(response);
     const data = await response.json();
 
     if(!response.ok) {
+      // window.location.assign("/login")
+      console.log("Throwing err...")
       throw new Error('Could not invalid API response, check network tab!');
     }
     return data;
