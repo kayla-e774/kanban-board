@@ -41,9 +41,11 @@ const retrieveTicket = async (id: number | null): Promise<TicketData> => {
     const data = await response.json();
 
     if(!response.ok) {
-      // window.location.assign("/login")
-      console.log("Throwing err...")
-      throw new Error('Could not invalid API response, check network tab!');
+      if (response.status === 403 || response.status === 401) {
+        Auth.logout();
+      } else {
+          throw new Error('Could not invalid API response, check network tab!');
+      }
     }
     return data;
   } catch (err) {
@@ -68,7 +70,11 @@ const createTicket = async (body: TicketData) => {
     const data = response.json();
 
     if(!response.ok) {
-      throw new Error('invalid API response, check network tab!');
+      if (response.status === 403 || response.status === 401) {
+        Auth.logout();
+      } else {
+          throw new Error('Could not invalid API response, check network tab!');
+      }
     }
 
     return data;
@@ -94,7 +100,11 @@ const updateTicket = async (ticketId: number, body: TicketData): Promise<TicketD
     const data = await response.json();
 
     if(!response.ok) {
-      throw new Error('invalid API response, check network tab!');
+      if (response.status === 403 || response.status === 401) {
+        Auth.logout();
+      } else {
+          throw new Error('Could not invalid API response, check network tab!');
+      }
     }
 
     return data;
@@ -118,7 +128,11 @@ const deleteTicket = async (ticketId: number): Promise<ApiMessage> => {
     const data = await response.json();
 
     if(!response.ok) {
-      throw new Error('invalid API response, check network tab!');
+      if (response.status === 403 || response.status === 401) {
+        Auth.logout();
+      } else {
+          throw new Error('Could not invalid API response, check network tab!');
+      }
     }
 
     return data;

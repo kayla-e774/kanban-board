@@ -11,7 +11,11 @@ const retrieveUsers = async () => {
     const data = await response.json();
 
     if(!response.ok) {
-      throw new Error('invalid user API response, check network tab!');
+      if (response.status === 403 || response.status === 401) {
+        Auth.logout();
+      } else {
+          throw new Error('Could not invalid API response, check network tab!');
+      }
     }
 
     return data;
