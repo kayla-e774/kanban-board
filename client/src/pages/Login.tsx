@@ -16,6 +16,7 @@ const Login = () => {
       ...loginData,
       [name]: value
     });
+    setError(false);
   };
 
   const handleSubmit = async (e: FormEvent) => {
