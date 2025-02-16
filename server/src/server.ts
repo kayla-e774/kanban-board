@@ -17,11 +17,7 @@ app.use(express.json());
 app.use(routes);
 
 app.get('/*', function(_req, res) {
-  res.sendFile('./index.html', function(err) {
-    if (err) {
-      res.status(500).send(err)
-    }
-  })
+  res.sendFile('./index.html');
 })
 
 sequelize.sync({force: forceDatabaseRefresh}).then(() => {
