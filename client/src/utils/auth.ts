@@ -45,6 +45,14 @@ class AuthService {
     // TODO: remove the token from localStorage
     localStorage.removeItem('id_token');
     // TODO: redirect to the login page
+
+    /*
+    NOTE :
+    window.location.assign('/login');
+
+    Would redirect to login page, and this works on a local deployment.
+    The render deployment cannot handle the requests.
+    */
     window.location.assign('/');
   }
 }
