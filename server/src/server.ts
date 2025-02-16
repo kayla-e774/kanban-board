@@ -3,9 +3,11 @@ const forceDatabaseRefresh = false;
 import dotenv from 'dotenv';
 dotenv.config();
 
+import path from 'path';
 import express from 'express';
 import routes from './routes/index.js';
 import { sequelize } from './models/index.js';
+
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -17,7 +19,7 @@ app.use(express.json());
 app.use(routes);
 
 app.get('/*', function(_req, res) {
-  res.sendFile('./index.html');
+  res.sendFile(path.join(__dirname, 'index.html'));
 })
 
 sequelize.sync({force: forceDatabaseRefresh}).then(() => {
